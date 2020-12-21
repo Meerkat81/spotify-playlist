@@ -1,7 +1,5 @@
 import axios from 'axios'
 import qs from 'qs';
-let accessToken
-let expiresIn
 
 const Spotify = async () => {
     const Secret = 'Basic NzRhNDRjODI1ZGRkNDQ1N2ExMjBiMGY2MjE2ODJlMjE6YzZlNmQyZDZmOWE1NDA3Nzk4MmZlYjU1NmNkNzUzNzU='
@@ -24,12 +22,8 @@ const Spotify = async () => {
       qs.stringify(data),
       headers
     );
-    
-    accessToken = response.data.access_token
-    expiresIn = response.data.expires_in
-    console.log(expiresIn);
-    return accessToken
-    return expiresIn
+    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.log(error);
   }
