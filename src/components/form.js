@@ -1,11 +1,11 @@
 import React from "react"
-import Spotify from "../util/Spotify"
+//import Spotify from "../util/Searches"
 
 import { Button, Form } from 'semantic-ui-react'
 
-const Searchform = (props) => {
+const Searchform = ( {search}  ) => {
   return (
-    <Form onSubmit={Spotify}>
+    <Form onSubmit={search}>
       <Form.Field>
         <label>Playlist</label>
         <input placeholder='Playlist' />

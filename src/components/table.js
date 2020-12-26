@@ -1,7 +1,8 @@
 import React from 'react'
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 
-const PlayListTable = () => {
+const PlayListTable = ({ playlists }) => {
+  console.log("table", playlists)
   return(
     <Table celled>
       <Table.Header>
@@ -12,20 +13,15 @@ const PlayListTable = () => {
       </Table.Header>
 
       <Table.Body>
-        <Table.Row>
-          <Table.Cell>
-            <Label ribbon>That 90s List</Label>
-          </Table.Cell>
-          <Table.Cell>30</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Totally Wicked</Table.Cell>
-          <Table.Cell>55</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Far Out Dude</Table.Cell>
-          <Table.Cell>50</Table.Cell>
-        </Table.Row>
+       { playlists.map(playlist =>(
+          <Table.Row>
+            <Table.Cell>
+                {playlist.name}
+            </Table.Cell>
+            <Table.Cell>
+              {playlist.track_count}
+            </Table.Cell>
+          </Table.Row> ))}
       </Table.Body>
 
       <Table.Footer>
@@ -52,3 +48,4 @@ const PlayListTable = () => {
 
 
 export default PlayListTable
+
