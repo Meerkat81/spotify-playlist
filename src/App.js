@@ -3,6 +3,8 @@ import Searchform from "./components/form"
 import Table from "./components/table"
 import Spotify from "./util/Searches"
 import './App.css'
+import { useStorageState } from "react-storage-hooks"
+
 //Show Search Box
 //Get Spotify token
 //Query Spotify playlists
@@ -11,30 +13,24 @@ import './App.css'
 //TODO: Break songs up by category into line graph
 
 const App = (props) => {
-  const [playlists, setPlaylists] = useState([
-      {
-        name: "Awesome Dude",
-        track_count: "150",
-        link:"yahoo.com"
-      },
-      {
-        name:"How about that",
-        track_count:"123",
-        link: "google.com"
-      },
-      ])
-    
-    async function search(searchTerm){
-      await setPlaylists(Spotify.playlistsearch())
-    };
+  const [playlists, setPlaylists] = useStorageState([])
   
-  
-    return (
-      <div className="App">
-        <Searchform search={search} />
-        <Table playlists={playlists}/>
-      </div>
-    )
+ 
+  function search(searchTerm){
+    let spotlist = Spotify.playlistsearch(searchTerm)
+    spotlist.then(val =>{
+      console.log(val[0].description)} )
+  };
+
+  return (
+    <div className="App">
+      <Searchform search={search}/>
+      <Table playlists={playlists}/>
+    </div>
+  )
 };
 
 export default App;
+
+
+//console.log(val[0].description)
