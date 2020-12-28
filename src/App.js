@@ -13,13 +13,21 @@ import { useStorageState } from "react-storage-hooks"
 //TODO: Break songs up by category into line graph
 
 const App = (props) => {
-  const [playlists, setPlaylists] = useStorageState([])
+  const [playlists, setPlaylists] = useState([])
   
  
   function search(searchTerm){
     let spotlist = Spotify.playlistsearch(searchTerm)
+    let tablelist = []
     spotlist.then(val =>{
-      console.log(val[0].description)} )
+      val.forEach(element =>{
+        tablelist.push(
+          { name: element.description,
+            track_count: element.tracks.total,
+          })
+      } 
+    )})
+    setPlaylists(tablelist)
   };
 
   return (
