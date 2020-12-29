@@ -31,16 +31,13 @@ const Spotify = {
     return accessToken
   },
   
-  async playlistsearch(){
+  async playlistsearch(term){
     const accessToken = await Spotify.getAccessToken()
-    console.log(accessToken)
     const header = "Bearer " + accessToken
     
-    console.log(header)
-    Spotify.postData(`https://api.spotify.com/v1/search?q=90s&type=playlist&limit=10`, {auth: header, method: 'GET'})
-    .then(data => {
-      console.log(data)
-    });
+    let data = await Spotify.postData(`https://api.spotify.com/v1/search?q=${term}&type=playlist&limit=10`, {auth: header, method: 'GET'})
+    let playlists = data.playlists.items
+    return playlists
   },
 }
 
