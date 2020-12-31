@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Searchform from "./components/form"
 import Table from "./components/table"
 import Spotify from "./util/Searches"
@@ -14,21 +14,27 @@ import { useStorageState } from "react-storage-hooks"
 
 const App = (props) => {
   const [playlists, setPlaylists] = useState([])
+  const [searchString, setSearchString] = useState() //use instead of onsubmit 
+  const isFirstRef = useRef(true);
   
- 
-  function search(searchTerm){
-    let spotlist = Spotify.playlistsearch(searchTerm)
-    let tablelist = []
-    spotlist.then(val =>{
-      val.forEach(element =>{
-        tablelist.push(
-          { name: element.description,
-            track_count: element.tracks.total,
-          })
-      } 
-    )})
-    setPlaylists(tablelist)
-  };
+  const search = (value) => {
+    setSearchString(value)
+  }
+
+  useEffect(() => {
+      if (isFirstRef.current) {
+      isFirstRef.current = false;
+      return;
+      }
+      
+      Spotify.playlistsearch(searchString)
+        .then(val => {
+          setPlaylists(val.map(element => ({
+              name: element.description,
+              track_count: element.tracks.total,
+          })))
+        })
+      }, [searchString]);
 
   return (
     <div className="App">
@@ -39,6 +45,3 @@ const App = (props) => {
 };
 
 export default App;
-
-
-//console.log(val[0].description)
