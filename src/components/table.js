@@ -1,8 +1,9 @@
 import React from 'react'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Icon, Menu, Table } from 'semantic-ui-react'
+import Spotify from "../util/Searches"
+
 
 const PlayListTable = ({ playlists }) => {
-  console.log("table", playlists)
   return(
     <Table celled>
       <Table.Header>
@@ -11,19 +12,22 @@ const PlayListTable = ({ playlists }) => {
           <Table.HeaderCell>Track Count</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-
       <Table.Body>
-       { playlists.map(playlist =>(
-          <Table.Row>
-            <Table.Cell>
-                {playlist.name}
-            </Table.Cell>
-            <Table.Cell>
-              {playlist.track_count}
-            </Table.Cell>
-          </Table.Row> ))}
+       {playlists.map( (playlist) => {
+          return (
+              <Table.Row key={playlist} >
+                <Table.Cell onClick={() => console.log(playlist.id)}>
+                  {playlist.name}
+                </Table.Cell>
+                <Table.Cell>
+                  {playlist.track_count}
+                </Table.Cell>
+              </Table.Row>
+              )
+            }
+          )
+        }
       </Table.Body>
-
       <Table.Footer>
         <Table.Row>
           <Table.HeaderCell colSpan='3'>

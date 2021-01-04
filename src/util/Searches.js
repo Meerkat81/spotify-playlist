@@ -39,6 +39,16 @@ const Spotify = {
     let playlists = data.playlists.items
     return playlists
   },
+
+  async tracklist(playlistid){
+    const accessToken = await Spotify.getAccessToken()
+    const header = "Bearer " + accessToken
+
+    let data = await Spotify.postData(`https://api.spotify.com/v1/playlists/${playlistid}/tracks`, {auth: header, method:'GET'})
+    let tracks = data.tracks.items
+    return tracks
+  }
+
 }
 
 export default Spotify

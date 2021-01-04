@@ -3,7 +3,6 @@ import Searchform from "./components/form"
 import Table from "./components/table"
 import Spotify from "./util/Searches"
 import './App.css'
-import { useStorageState } from "react-storage-hooks"
 
 //Show Search Box
 //Get Spotify token
@@ -30,16 +29,18 @@ const App = (props) => {
       Spotify.playlistsearch(searchString)
         .then(val => {
           setPlaylists(val.map(element => ({
+              key: element,
               name: element.description,
               track_count: element.tracks.total,
+              id: element.id,
           })))
         })
       }, [searchString]);
 
   return (
     <div className="App">
-      <Searchform search={search}/>
-      <Table playlists={playlists}/>
+      <Searchform search={search} />
+      <Table playlists={playlists} compact={true}/>
     </div>
   )
 };
