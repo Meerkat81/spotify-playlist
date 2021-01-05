@@ -27,8 +27,11 @@ const App = (props) => {
       }
       
       Spotify.playlistsearch(searchString)
-        .then(val => {
-          setPlaylists(val.map(element => ({
+        .then(list => {
+          return list.filter(filterlist => filterlist.description !== "")
+        })
+        .then(list => {
+          setPlaylists(list.map(element => ({
               key: element,
               name: element.description,
               track_count: element.tracks.total,
