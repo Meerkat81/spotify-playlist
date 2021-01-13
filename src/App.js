@@ -12,7 +12,8 @@ import './App.css'
 //TODO: Break songs up by category into line graph
 
 const App = (props) => {
-  const [playlists, setPlaylists] = useState([])
+  const [playlists, setPlaylists] = useState(null)
+  const [pages, setPages] = useState(0)
   const [searchString, setSearchString] = useState() //use instead of onsubmit 
   const isFirstRef = useRef(true);
   
@@ -28,7 +29,8 @@ const App = (props) => {
       
       Spotify.playlistsearch(searchString)
         .then(list => {
-          return list.filter(filterlist => filterlist.description !== "")
+          setPages(list[1])
+          return list[0].filter(filterlist => filterlist.description !== "")
         })
         .then(list => {
           setPlaylists(list.map(element => ({
@@ -42,8 +44,10 @@ const App = (props) => {
 
   return (
     <div className="App">
+    <React.Fragment>
       <Searchform search={search} />
-      <Table playlists={playlists} compact={true}/>
+      {playlists && <Table playlists={playlists} pages={pages} compact={true}/>}
+    </React.Fragment>
     </div>
   )
 };
