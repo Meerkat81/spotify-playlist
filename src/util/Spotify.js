@@ -31,4 +31,3 @@ const Spotify = async () => {
 }
 
 export default Spotify;
-

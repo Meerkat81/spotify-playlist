@@ -38,7 +38,6 @@ const Spotify = {
     let data = await Spotify.postData(`https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=10`, {auth: header, method: 'GET'})
     let playlists = data.playlists.items
     let total = data.playlists.total
-    console.log(total)
     return [playlists, total]
   },
 
@@ -47,7 +46,7 @@ const Spotify = {
     const header = "Bearer " + accessToken
 
     let data = await Spotify.postData(`https://api.spotify.com/v1/playlists/${playlistid}/tracks`, {auth: header, method:'GET'})
-    let tracks = data.tracks.items
+    let tracks = data.items
     return tracks
   }
 

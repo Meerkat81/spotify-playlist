@@ -1,6 +1,4 @@
 import React from "react"
-import Spotify from "../util/Searches"
-
 import { Button, Form } from 'semantic-ui-react'
 
 const Searchform = ({ search }) => {
