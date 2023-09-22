@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Searchform from "./components/form";
 import Table from "./components/table";
-import Spotify from "./util/Searches";
+import SpotifyAPI from "./util/SpotifyAPI";
 import "./App.css";
 
 //Show Search Box
@@ -34,7 +34,7 @@ const App = (props) => {
       return;
     }
 
-    Spotify.tracklist(playlistId).then((tracks) => {
+    SpotifyAPI.tracklist(playlistId).then((tracks) => {
       console.log(tracks);
     });
   }, [playlistId]);
@@ -46,7 +46,11 @@ const App = (props) => {
     }
 
     async function callSpotify() {
-      const res = await Spotify.playlistsearch(searchString);
+      try {
+        const res = await SpotifyAPI.playListSearch(searchString);
+        console.log("ppp");
+        console.log("callSpotify", res);
+      } catch (err) {}
       // .then((list) => {
       //   setPages(list[1]);
       //   return list[0].filter((filterlist) => filterlist.description !== "");
@@ -61,7 +65,6 @@ const App = (props) => {
       //     }))
       //   );
       // });
-      console.log(res);
     }
     callSpotify();
   }, [searchString]);
