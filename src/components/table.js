@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import { Icon, Menu, Table } from 'semantic-ui-react'
-import Spotify from "../util/Searches"
-
+import React, { useState, useEffect } from "react";
+import { Icon, Menu, Table } from "semantic-ui-react";
+import Spotify from "../util/SpotifyAPI";
 
 const PlayListTable = ({ playlists, pages, tracklistId }) => {
-  return(
+  return (
     <Table celled>
       <Table.Header>
         <Table.Row>
@@ -13,44 +12,38 @@ const PlayListTable = ({ playlists, pages, tracklistId }) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-       {playlists.map( (playlist) => {
-        return (
-              <Table.Row key={playlist.id} >
-                <Table.Cell onClick={() => tracklistId(playlist.id)}>
-                  {playlist.name}
-                </Table.Cell>
-                <Table.Cell>
-                  {playlist.track_count}
-                </Table.Cell>
-              </Table.Row>
-              )
-            }
-          )
-        }
+        {playlists.map((playlist) => {
+          return (
+            <Table.Row key={playlist.id}>
+              <Table.Cell onClick={() => tracklistId(playlist.id)}>
+                {playlist.name}
+              </Table.Cell>
+              <Table.Cell>{playlist.track_count}</Table.Cell>
+            </Table.Row>
+          );
+        })}
       </Table.Body>
       <Table.Footer>
         <Table.Row>
-        <Table.HeaderCell>1 / {pages}</Table.HeaderCell>
-          <Table.HeaderCell colSpan='3'>
-            <Menu floated='right' pagination>
-              <Menu.Item as='a' icon>
-                <Icon name='chevron left' />
+          <Table.HeaderCell>1 / {pages}</Table.HeaderCell>
+          <Table.HeaderCell colSpan="3">
+            <Menu floated="right" pagination>
+              <Menu.Item as="a" icon>
+                <Icon name="chevron left" />
               </Menu.Item>
-              <Menu.Item as='a'>1</Menu.Item>
-              <Menu.Item as='a'>2</Menu.Item>
-              <Menu.Item as='a'>3</Menu.Item>
-              <Menu.Item as='a'>4</Menu.Item>
-              <Menu.Item as='a' icon>
-                <Icon name='chevron right' />
+              <Menu.Item as="a">1</Menu.Item>
+              <Menu.Item as="a">2</Menu.Item>
+              <Menu.Item as="a">3</Menu.Item>
+              <Menu.Item as="a">4</Menu.Item>
+              <Menu.Item as="a" icon>
+                <Icon name="chevron right" />
               </Menu.Item>
             </Menu>
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
-      </Table>
-  )
-}
+    </Table>
+  );
+};
 
-
-export default PlayListTable
-
+export default PlayListTable;
