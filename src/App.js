@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Searchform from "./components/form";
 import Table from "./components/table";
-import SpotifyAPI from "./util/SpotifyAPI";
+import { playListSearch } from "./modules/spotifyApi";
+
 import "./App.css";
 
 //Show Search Box
@@ -19,11 +20,11 @@ const App = (props) => {
   const [searchString, setSearchString] = useState(); //use instead of onsubmit
   const isFirstRef = useRef(true);
   const isFirstTrack = useRef(true);
-
+  const [error, setError] = useState(null);
   const search = (value) => {
     setSearchString(value);
   };
-
+  console.log(searchString);
   const tracklistId = (value) => {
     setplaylistId(value);
   };
@@ -33,24 +34,25 @@ const App = (props) => {
       isFirstTrack.current = false;
       return;
     }
-
-    SpotifyAPI.tracklist(playlistId).then((tracks) => {
-      console.log(tracks);
-    });
   }, [playlistId]);
 
   useEffect(() => {
-    if (isFirstRef.current) {
-      isFirstRef.current = false;
-      return;
-    }
-
     async function callSpotify() {
       try {
-        const res = await SpotifyAPI.playListSearch(searchString);
-        console.log("ppp");
-        console.log("callSpotify", res);
-      } catch (err) {}
+        const results = await playListSearch(searchString);
+        // if (results instanceof Error) {
+        //   console.log(results);
+        console.log("19", results.Error);
+      } catch (err) {
+        console.log("lol", err);
+        setError(err);
+      }
+
+      //   if (playListsCall.message) throw new Error(playListsCall.error);
+      // } catch (err) {
+      //   console.log(err);
+      //   setError(err.message);
+      // }
       // .then((list) => {
       //   setPages(list[1]);
       //   return list[0].filter((filterlist) => filterlist.description !== "");
@@ -73,6 +75,7 @@ const App = (props) => {
     <div className="App">
       <React.Fragment>
         <Searchform search={search} />
+        <ErrorMessage messsage={error} />
         {playlists && (
           <Table
             playlists={playlists}
@@ -86,5 +89,11 @@ const App = (props) => {
     </div>
   );
 };
-
+function ErrorMessage({ message }) {
+  return (
+    <div className="error">
+      <span>{message}</span>
+    </div>
+  );
+}
 export default App;
