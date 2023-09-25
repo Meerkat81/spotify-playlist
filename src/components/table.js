@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
-import Spotify from "../util/SpotifyAPI";
 
 const PlayListTable = ({ playlists, pages, tracklistId }) => {
   return (
