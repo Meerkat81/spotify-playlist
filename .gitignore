@@ -24,3 +24,5 @@ yarn-error.log*
 .eslintcache
 .gitignore
 .env
+src/modules/test.js
+src/util/SpotifyAPoldI.js
