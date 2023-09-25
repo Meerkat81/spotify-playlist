@@ -29,7 +29,6 @@ async function postData(url = "", data = {}) {
     if (!res.ok) throw Error("Something went wrong");
     return res.json();
   } catch (err) {
-    console.log(err);
     return { err };
   } // parses JSON response into native JavaScript objects
 }
@@ -39,19 +38,17 @@ async function getAccessToken() {
   let res = await postData("https://accounts.spotify.com/api/token", {
     grant_type: "client_credentials",
   });
-
-  if (res.accessToken) accessToken = res.access_token;
+  if (res.access_token) accessToken = res.access_token;
+  return;
 }
 
 async function playListSearch(term) {
-  const accessToken = await getAccessToken();
-  console.log(accessToken);
+  await getAccessToken();
   const header = "Bearer " + accessToken;
   let data = await postData(
     `https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=10`,
     { auth: header, method: "GET" }
   );
-  console.log("1", data);
   if (data.err) return data.err;
   let playlists = data.playlists.items;
   let total = data.playlists.total;
