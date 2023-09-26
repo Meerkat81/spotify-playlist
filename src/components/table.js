@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
-
+import Playlist from "./Playlist";
 const PlayListTable = ({ playlists, pages, tracklistId }) => {
   return (
     <Table celled>
       <Table.Header>
         <Table.Row>
+          <Table.HeaderCell></Table.HeaderCell>
           <Table.HeaderCell>Playlist</Table.HeaderCell>
           <Table.HeaderCell>Track Count</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-      <Table.Body>
-        {playlists.map((playlist) => {
-          return (
-            <Table.Row key={playlist.id}>
-              <Table.Cell onClick={() => tracklistId(playlist.id)}>
-                {playlist.name}
-              </Table.Cell>
-              <Table.Cell>{playlist.track_count}</Table.Cell>
-            </Table.Row>
-          );
-        })}
-      </Table.Body>
+      <Playlist playlists={playlists} tracklistId={tracklistId} />
       <Table.Footer>
         <Table.Row>
           <Table.HeaderCell>1 / {pages}</Table.HeaderCell>
