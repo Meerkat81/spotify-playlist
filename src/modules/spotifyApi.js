@@ -55,4 +55,13 @@ async function playListSearch(term) {
   return [playlists, total];
 }
 
+// async function playListTracks(playlist_id) {
+//   await getAccessToken();
+//   const header = "Bearer " + accessToken;
+//   let data = await postData(
+//     `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`
+//   );
+//   console.log(data);
+// }
+
 export { playListSearch };
