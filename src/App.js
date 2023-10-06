@@ -595,8 +595,11 @@ const App = (props) => {
   useEffect(
     function () {
       async function callSpotify() {
+        if (query.length < 3) return;
+
         const results = await playListSearch(query);
         setPlaylists(results[0]);
+
         if (results instanceof Error) {
           console.log("lol", results.message);
           setError(results.message);
@@ -625,6 +628,7 @@ const App = (props) => {
       //   );
       // });
       if (query) callSpotify();
+      return function () {};
     },
     [query]
   );

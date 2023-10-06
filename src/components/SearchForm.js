@@ -6,9 +6,14 @@ function SearchForm({ query, setQuery }) {
     <Form onSubmit={(event) => setQuery(event.target.term.value)}>
       <Form.Field>
         <label>Playlist</label>
-        <input name="term" placeholder="Search Playlists" />
+        <input
+          name="term"
+          placeholder="Search Playlists"
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
+        />
       </Form.Field>
-      <Button type="submit">Submit</Button>
     </Form>
   );
 }
