@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "./components/SearchForm";
-import Table from "./components/Table";
+import PlayListTable from "./components/PlayListTable";
 import { playListSearch } from "./modules/spotifyApi";
 
 import "./App.css";
@@ -635,14 +635,14 @@ const App = (props) => {
         <SearchForm query={query} setQuery={setQuery} />
         {error && <ErrorMessage messsage={error} />}
         {playlists && (
-          <Table
+          <PlayListTable
             playlists={playlists}
             pages={pages}
             tracklistId={tracklistId}
             compact={true}
           />
         )}
-        {tracks && <Table tracks={tracks} compact={true} />}
+        {tracks && <PlayListTable tracks={tracks} compact={true} />}
       </>
     </div>
   );

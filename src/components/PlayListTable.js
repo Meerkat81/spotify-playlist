@@ -1,6 +1,7 @@
+import React from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
 import Playlist from "./Playlist";
-const PlayListTable = ({ playlists, pages, tracklistId }) => {
+function PlayListTable({ playlists, pages, tracklistId }) {
   return (
     <Table celled>
       <Table.Header>
@@ -32,6 +33,6 @@ const PlayListTable = ({ playlists, pages, tracklistId }) => {
       </Table.Footer>
     </Table>
   );
-};
+}
 
 export default PlayListTable;
