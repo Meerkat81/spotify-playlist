@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
 import Playlist from "./Playlist";
+import PlayListTablePagination from "./PlaylistTablePagination";
 function PlayListTable({ playlists, pages, tracklistId }) {
   return (
     <Table celled>
@@ -13,8 +14,9 @@ function PlayListTable({ playlists, pages, tracklistId }) {
       </Table.Header>
       <Playlist playlists={playlists} tracklistId={tracklistId} />
       <Table.Footer>
-        <Table.Row>
-          <Table.HeaderCell>1 / {pages}</Table.HeaderCell>
+        <PlayListTablePagination />
+        {/* <Table.Row>
+          <Table.HeaderCell>1 / {pages} </Table.HeaderCell>
           <Table.HeaderCell colSpan="3">
             <Menu floated="right" pagination>
               <Menu.Item as="a" icon>
@@ -29,7 +31,7 @@ function PlayListTable({ playlists, pages, tracklistId }) {
               </Menu.Item>
             </Menu>
           </Table.HeaderCell>
-        </Table.Row>
+        </Table.Row> */}
       </Table.Footer>
     </Table>
   );
