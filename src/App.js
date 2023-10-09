@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import SearchForm from "./components/SearchForm";
-import PlayListTable from "./components/PlayListTable";
-import { playListSearch } from "./modules/spotifyApi";
-
+import React, { useState } from "react";
+import AppLayout from "./Pages/AppLayout";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Show Search Box
 //Get Spotify token
@@ -567,88 +565,32 @@ const dummyListTracks = {
 };
 
 const App = (props) => {
-  const [playlists, setPlaylists] = useState(dummyPlayListsData[0]);
   const [pages, setPages] = useState(0);
-  const [playlistId, setplaylistId] = useState(null);
+
   const [tracks, setTracks] = useState(null);
-  const [query, setQuery] = useState(null); //use instead of onsubmit
-
-  const [error, setError] = useState(null);
-  const search = (value) => {
-    setQuery(value);
-  };
-  const tracklistId = (value) => {
-    setplaylistId(value);
-  };
-
-  useEffect(
-    function () {
-      console.log("this first run");
-      function help() {
-        console.log("first run ran again");
-      }
-      help();
-    },
-    [playlistId]
-  );
-
-  useEffect(
-    function () {
-      async function callSpotify() {
-        if (query.length < 3) return;
-
-        const results = await playListSearch(query);
-        setPlaylists(results[0]);
-
-        if (results instanceof Error) {
-          console.log("lol", results.message);
-          setError(results.message);
-        } else {
-          console.log(results);
-        }
-      }
-
-      //   if (playListsCall.message) throw new Error(playListsCall.error);
-      // } catch (err) {
-      //   console.log(err);
-      //   setError(err.message);
-      // }
-      // .then((list) => {
-      //   setPages(list[1]);
-      //   return list[0].filter((filterlist) => filterlist.description !== "");
-      // })
-      // .then((list) => {
-      //   setPlaylists(
-      //     list.map((element) => ({
-      //       key: element,
-      //       name: element.description,
-      //       track_count: element.tracks.total,
-      //       id: element.id,
-      //     }))
-      //   );
-      // });
-      if (query) callSpotify();
-      return function () {};
-    },
-    [query]
-  );
 
   return (
-    <div className="App">
-      <>
-        <SearchForm query={query} setQuery={setQuery} />
-        {error && <ErrorMessage messsage={error} />}
-        {playlists && (
-          <PlayListTable
-            playlists={playlists}
-            pages={pages}
-            tracklistId={tracklistId}
-            compact={true}
-          />
-        )}
-        {tracks && <PlayListTable tracks={tracks} compact={true} />}
-      </>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<AppLayout />} />
+      </Routes>
+    </BrowserRouter>
+    // <div className="App">
+    //   <AppLayout />
+    //   {/* <>
+    //     <SearchForm query={query} setQuery={setQuery} />
+    //     {error && <ErrorMessage messsage={error} />}
+    //     {playlists && (
+    //       <PlayListTable
+    //         playlists={playlists}
+    //         pages={pages}
+    //         tracklistId={tracklistId}
+    //         compact={true}
+    //       />
+    //     )}
+    //     {tracks && <PlayListTable tracks={tracks} compact={true} />}
+    //   </> */}
+    // </div>
   );
 };
 function ErrorMessage({ message }) {
