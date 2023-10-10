@@ -46,10 +46,11 @@ async function playListSearch(term) {
   await getAccessToken();
   const header = "Bearer " + accessToken;
   let data = await postData(
-    `https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=10`,
+    `https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=3`,
     { auth: header, method: "GET" }
   );
   if (data.err) return data.err;
+  console.log(data);
   let playlists = data.playlists.items;
   let total = data.playlists.total;
   return [playlists, total];

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
 import { playListSearch } from "../modules/spotifyApi";
@@ -8,6 +8,7 @@ function AppLayout() {
   const [playlists, setPlaylists] = useState(null);
   const [playlistId, setplaylistId] = useState(null);
   const [error, setError] = useState(null);
+  const [pages, setPages] = useState(null);
   const search = (value) => {
     setQuery(value);
   };
@@ -32,13 +33,14 @@ function AppLayout() {
         if (query.length < 3) return;
 
         const results = await playListSearch(query);
+
         setPlaylists(results[0]);
 
         if (results instanceof Error) {
           console.log("lol", results.message);
           setError(results.message);
         } else {
-          console.log(results);
+          // console.log(results);
         }
       }
 
@@ -49,13 +51,15 @@ function AppLayout() {
   );
 
   return (
-    <Grid>
-      <Grid.Column width={4}>
-        <SearchForm query={query} setQuery={setQuery} />
-        {playlists && !error && <PlayListTable playlists={playlists} />}
-      </Grid.Column>
-      <Grid.Column width={9}>LayoutLayoutLayoutLayout</Grid.Column>
-    </Grid>
+    <Container>
+      <Grid>
+        <Grid.Column width={4}>
+          <SearchForm query={query} setQuery={setQuery} />
+          {playlists && !error && <PlayListTable playlists={playlists} />}
+        </Grid.Column>
+        <Grid.Column width={9}>LayoutLayoutLayoutLayout</Grid.Column>
+      </Grid>
+    </Container>
   );
 }
 
