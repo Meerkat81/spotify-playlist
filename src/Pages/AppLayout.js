@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grid } from "semantic-ui-react";
+import { Segment, Grid } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
 import { playListSearch } from "../modules/spotifyApi";
@@ -59,9 +59,9 @@ function AppLayout() {
   );
 
   return (
-    <Container>
-      <Grid>
-        <Grid.Column width={4}>
+    <Segment>
+      <Grid columns={2}>
+        <Grid.Column width={8}>
           <SearchForm query={query} setQuery={setQuery} />
           {playlists && !error && (
             <PlayListTable
@@ -71,9 +71,9 @@ function AppLayout() {
             />
           )}
         </Grid.Column>
-        <Grid.Column width={9}>LayoutLayoutLayoutLayout</Grid.Column>
+        <Grid.Column width={8}>Future Graphs</Grid.Column>
       </Grid>
-    </Container>
+    </Segment>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppLayout from "./Pages/AppLayout";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -565,32 +565,12 @@ const dummyListTracks = {
 };
 
 const App = (props) => {
-  const [pages, setPages] = useState(0);
-
-  const [tracks, setTracks] = useState(null);
-
   return (
     <BrowserRouter>
       <Routes>
         <Route index element={<AppLayout />} />
       </Routes>
     </BrowserRouter>
-    // <div className="App">
-    //   <AppLayout />
-    //   {/* <>
-    //     <SearchForm query={query} setQuery={setQuery} />
-    //     {error && <ErrorMessage messsage={error} />}
-    //     {playlists && (
-    //       <PlayListTable
-    //         playlists={playlists}
-    //         pages={pages}
-    //         tracklistId={tracklistId}
-    //         compact={true}
-    //       />
-    //     )}
-    //     {tracks && <PlayListTable tracks={tracks} compact={true} />}
-    //   </> */}
-    // </div>
   );
 };
 function ErrorMessage({ message }) {

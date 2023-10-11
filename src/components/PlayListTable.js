@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import Playlist from "./Playlist";
 import PlayListTablePagination from "./PlaylistTablePagination";
 function PlayListTable({
