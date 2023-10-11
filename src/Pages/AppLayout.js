@@ -8,7 +8,7 @@ function AppLayout() {
   const [playlists, setPlaylists] = useState(null);
   const [playlistId, setplaylistId] = useState(null);
   const [error, setError] = useState(null);
-  const [pages, setPages] = useState(null);
+  const [pages, setPages] = useState({});
   const search = (value) => {
     setQuery(value);
   };
@@ -27,14 +27,22 @@ function AppLayout() {
     [playlistId]
   );
 
+  function handlePageDirectionClick(direction) {
+    console.log(direction);
+  }
+
   useEffect(
     function () {
       async function callSpotify() {
         if (query.length < 3) return;
 
         const results = await playListSearch(query);
+        // const {items: playlist, }
         console.log(results.playlists);
-        setPlaylists(results.playlists);
+        const { limit, next, offset, previous, total } = results.playlists;
+        console.log("oo", results.playlists.items);
+        setPages({ limit, next, offset, previous, total });
+        setPlaylists(results.playlists.items);
 
         if (results instanceof Error) {
           console.log("lol", results.message);
@@ -55,7 +63,13 @@ function AppLayout() {
       <Grid>
         <Grid.Column width={4}>
           <SearchForm query={query} setQuery={setQuery} />
-          {playlists && !error && <PlayListTable playlists={playlists} />}
+          {playlists && !error && (
+            <PlayListTable
+              pages={pages}
+              playlists={playlists}
+              onPageDirectionClick={handlePageDirectionClick}
+            />
+          )}
         </Grid.Column>
         <Grid.Column width={9}>LayoutLayoutLayoutLayout</Grid.Column>
       </Grid>

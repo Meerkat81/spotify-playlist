@@ -2,7 +2,12 @@ import React from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
 import Playlist from "./Playlist";
 import PlayListTablePagination from "./PlaylistTablePagination";
-function PlayListTable({ playlists, pages, tracklistId }) {
+function PlayListTable({
+  playlists,
+  tracklistId,
+  onPageDirectionClick,
+  pages,
+}) {
   return (
     <Table celled>
       <Table.Header>
@@ -14,7 +19,10 @@ function PlayListTable({ playlists, pages, tracklistId }) {
       </Table.Header>
       <Playlist playlists={playlists} tracklistId={tracklistId} />
       <Table.Footer>
-        <PlayListTablePagination />
+        <PlayListTablePagination
+          onPageDirectionClick={onPageDirectionClick}
+          pages={pages}
+        />
       </Table.Footer>
     </Table>
   );
