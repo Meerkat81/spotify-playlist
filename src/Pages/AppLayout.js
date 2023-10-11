@@ -33,8 +33,8 @@ function AppLayout() {
         if (query.length < 3) return;
 
         const results = await playListSearch(query);
-
-        setPlaylists(results[0]);
+        console.log(results.playlists);
+        setPlaylists(results.playlists);
 
         if (results instanceof Error) {
           console.log("lol", results.message);
