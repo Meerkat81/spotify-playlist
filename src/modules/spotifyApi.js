@@ -51,9 +51,10 @@ async function playListSearch(term) {
   );
   if (data.err) return data.err;
   console.log(data);
-  let playlists = data.playlists.items;
-  let total = data.playlists.total;
-  return [playlists, total];
+
+  return data;
+  // let total = data.playlists.total;
+  // return [playlists, total];
 }
 
 // async function playListTracks(playlist_id) {
