@@ -9,6 +9,7 @@ function AppLayout() {
   const [playlistId, setplaylistId] = useState(null);
   const [error, setError] = useState(null);
   const [pages, setPages] = useState({});
+  const [pageSelection, setPageSelection] = useState();
   const search = (value) => {
     setQuery(value);
   };
@@ -27,8 +28,8 @@ function AppLayout() {
     [playlistId]
   );
 
-  function handlePageDirectionClick(direction) {
-    console.log(direction);
+  function handlePaginationClick(direction) {
+    setPageSelection(direction.activePage);
   }
 
   useEffect(
@@ -40,7 +41,6 @@ function AppLayout() {
         // const {items: playlist, }
         console.log(results.playlists);
         const { limit, next, offset, previous, total } = results.playlists;
-        console.log("oo", results.playlists.items);
         setPages({ limit, next, offset, previous, total });
         setPlaylists(results.playlists.items);
 
@@ -67,7 +67,7 @@ function AppLayout() {
             <PlayListTable
               pages={pages}
               playlists={playlists}
-              onPageDirectionClick={handlePageDirectionClick}
+              onPageDirectionClick={handlePaginationClick}
             />
           )}
         </Grid.Column>
