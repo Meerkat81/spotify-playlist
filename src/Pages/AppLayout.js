@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Segment, Grid } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
-import { playListSearch } from "../modules/spotifyApi";
+import { playListSearch, playListTablePagination } from "../modules/spotifyApi";
+import PlayListTablePagination from "../components/PlaylistTablePagination";
 function AppLayout() {
   const [query, setQuery] = useState(null);
   const [playlists, setPlaylists] = useState(null);
@@ -17,17 +18,28 @@ function AppLayout() {
     setplaylistId(value);
   };
 
+  // useEffect(
+  //   function () {
+  //     console.log("this first run");
+  //     function help() {
+  //       console.log("first run ran again");
+  //     }
+  //     help();
+  //   },
+  //   [playlistId]
+  // );
+
   useEffect(
     function () {
-      console.log("this first run");
-      function help() {
-        console.log("first run ran again");
+      console.log(pageSelection);
+      async function CallSpotify() {
+        const results = await playListTablePagination(pageSelection, query);
+        setPlaylists(results.playlists.items);
       }
-      help();
+      if (pageSelection) CallSpotify();
     },
-    [playlistId]
+    [pageSelection]
   );
-
   function handlePaginationClick(direction) {
     setPageSelection(direction.activePage);
   }

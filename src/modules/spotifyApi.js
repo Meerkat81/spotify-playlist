@@ -42,11 +42,24 @@ async function getAccessToken() {
   return;
 }
 
+async function playListTablePagination(number, query) {
+  const offset = number * 10;
+  await getAccessToken();
+  const header = "Bearer " + accessToken;
+  let data = await postData(
+    `https://api.spotify.com/v1/search?query=${query}&type=playlist&locale=en-US%2Cen&offset=${offset}&limit=10`,
+    { auth: header, method: "GET" }
+  );
+  if (data.err) return data.err;
+  console.log(data);
+
+  return data;
+}
 async function playListSearch(term) {
   await getAccessToken();
   const header = "Bearer " + accessToken;
   let data = await postData(
-    `https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=3`,
+    `https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=10`,
     { auth: header, method: "GET" }
   );
   if (data.err) return data.err;
@@ -66,4 +79,4 @@ async function playListSearch(term) {
 //   console.log(data);
 // }
 
-export { playListSearch };
+export { playListSearch, playListTablePagination };
