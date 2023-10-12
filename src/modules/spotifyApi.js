@@ -68,8 +68,15 @@ async function playListSearch(term) {
 }
 
 async function getPlayListDetails(id) {
-  console.log("in it");
-  return id;
+  await getAccessToken();
+  const header = "Bearer " + accessToken;
+  let data = await postData(
+    `https://api.spotify.com/v1/playlists/${id}/tracks?limit=100&fields=items(track.popularity,track(album(release_date)))`,
+    { auth: header, method: "GET" }
+  );
+  if (data.err) return data.err;
+
+  return data;
 }
 
 export { playListSearch, playListTablePagination, getPlayListDetails };

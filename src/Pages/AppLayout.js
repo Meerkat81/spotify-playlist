@@ -49,7 +49,7 @@ function AppLayout() {
           // console.log(results);
         }
       }
-      CallSpotifyDetails();
+      if (playlistId) CallSpotifyDetails();
     },
     [playlistId]
   );
