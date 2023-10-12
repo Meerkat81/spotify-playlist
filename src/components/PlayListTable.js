@@ -7,6 +7,7 @@ function PlayListTable({
   tracklistId,
   onPageDirectionClick,
   pages,
+  onPlayListClick,
 }) {
   return (
     <Table celled>
@@ -17,7 +18,11 @@ function PlayListTable({
           <Table.HeaderCell>Track Count</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-      <Playlist playlists={playlists} tracklistId={tracklistId} />
+      <Playlist
+        playlists={playlists}
+        tracklistId={tracklistId}
+        onPlayListClick={onPlayListClick}
+      />
       <Table.Footer>
         <PlayListTablePagination
           onPageDirectionClick={onPageDirectionClick}

@@ -63,20 +63,13 @@ async function playListSearch(term) {
     { auth: header, method: "GET" }
   );
   if (data.err) return data.err;
-  console.log(data);
 
   return data;
-  // let total = data.playlists.total;
-  // return [playlists, total];
 }
 
-// async function playListTracks(playlist_id) {
-//   await getAccessToken();
-//   const header = "Bearer " + accessToken;
-//   let data = await postData(
-//     `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`
-//   );
-//   console.log(data);
-// }
+async function getPlayListDetails(id) {
+  console.log("in it");
+  return id;
+}
 
-export { playListSearch, playListTablePagination };
+export { playListSearch, playListTablePagination, getPlayListDetails };

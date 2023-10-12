@@ -1,13 +1,16 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
-function Playlist({ playlists, tracklistId }) {
+function Playlist({ playlists, onPlayListClick }) {
   return (
     <Table.Body>
       {playlists.map((playlist) => {
         let image = playlist.images[0].url;
 
         return (
-          <Table.Row key={playlist.id} onClick={() => console.log(playlist.id)}>
+          <Table.Row
+            key={playlist.id}
+            onClick={() => onPlayListClick(playlist.id)}
+          >
             <Table.Cell>
               <img className="playList-image" src={image} atl={playlist.name} />
             </Table.Cell>

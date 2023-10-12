@@ -2,36 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Segment, Grid } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
-import { playListSearch, playListTablePagination } from "../modules/spotifyApi";
+import {
+  playListSearch,
+  playListTablePagination,
+  getPlayListDetails,
+} from "../modules/spotifyApi";
 import PlayListTablePagination from "../components/PlaylistTablePagination";
 function AppLayout() {
   const [query, setQuery] = useState(null);
   const [playlists, setPlaylists] = useState(null);
-  const [playlistId, setplaylistId] = useState(null);
+  const [playlistId, setPlaylistId] = useState(null);
   const [error, setError] = useState(null);
   const [pages, setPages] = useState({});
   const [pageSelection, setPageSelection] = useState();
+  const [playlistDetail, setPlayListDetail] = useState(null);
   const search = (value) => {
     setQuery(value);
   };
-  const tracklistId = (value) => {
-    setplaylistId(value);
-  };
-
-  // useEffect(
-  //   function () {
-  //     console.log("this first run");
-  //     function help() {
-  //       console.log("first run ran again");
-  //     }
-  //     help();
-  //   },
-  //   [playlistId]
-  // );
 
   useEffect(
     function () {
-      console.log(pageSelection);
       async function CallSpotify() {
         const results = await playListTablePagination(pageSelection, query);
         setPlaylists(results.playlists.items);
@@ -43,6 +33,26 @@ function AppLayout() {
   function handlePaginationClick(direction) {
     setPageSelection(direction.activePage);
   }
+  function handlePlayListClick(id) {
+    setPlaylistId(id);
+  }
+
+  useEffect(
+    function () {
+      async function CallSpotifyDetails() {
+        const results = await getPlayListDetails(playlistId);
+        setPlayListDetail(results);
+        if (results instanceof Error) {
+          console.log("lol", results.message);
+          setError(results.message);
+        } else {
+          // console.log(results);
+        }
+      }
+      CallSpotifyDetails();
+    },
+    [playlistId]
+  );
 
   useEffect(
     function () {
@@ -51,7 +61,6 @@ function AppLayout() {
 
         const results = await playListSearch(query);
         // const {items: playlist, }
-        console.log(results.playlists);
         const { limit, next, offset, previous, total } = results.playlists;
         setPages({ limit, next, offset, previous, total });
         setPlaylists(results.playlists.items);
@@ -71,8 +80,8 @@ function AppLayout() {
   );
 
   return (
-    <Segment>
-      <Grid columns={2}>
+    <Grid columns={2}>
+      <Segment>
         <Grid.Column width={8}>
           <SearchForm query={query} setQuery={setQuery} />
           {playlists && !error && (
@@ -80,12 +89,13 @@ function AppLayout() {
               pages={pages}
               playlists={playlists}
               onPageDirectionClick={handlePaginationClick}
+              onPlayListClick={handlePlayListClick}
             />
           )}
         </Grid.Column>
-        <Grid.Column width={8}>Future Graphs</Grid.Column>
-      </Grid>
-    </Segment>
+      </Segment>
+      <Grid.Column width={8}>hi there {playlistDetail}</Grid.Column>
+    </Grid>
   );
 }
 
