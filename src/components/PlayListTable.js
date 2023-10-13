@@ -10,7 +10,7 @@ function PlayListTable({
   onPlayListClick,
 }) {
   return (
-    <Table celled>
+    <Table celled small>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell></Table.HeaderCell>

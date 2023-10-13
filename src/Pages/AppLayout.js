@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Segment, Grid } from "semantic-ui-react";
+import { Segment, Grid, Container } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
+import DetailsPlaceholder from "../components/DetailsPlaceholder";
 import {
   playListSearch,
   playListTablePagination,
@@ -80,10 +81,10 @@ function AppLayout() {
   );
 
   return (
-    <Grid columns={2}>
-      <Segment>
-        <Grid.Column width={8}>
-          <SearchForm query={query} setQuery={setQuery} />
+    <Container>
+      <SearchForm query={query} setQuery={setQuery} />
+      <Grid>
+        <Grid.Column width={12}>
           {playlists && !error && (
             <PlayListTable
               pages={pages}
@@ -93,9 +94,13 @@ function AppLayout() {
             />
           )}
         </Grid.Column>
-      </Segment>
-      <Grid.Column width={8}>hi there {playlistDetail}</Grid.Column>
-    </Grid>
+        <Grid.Column width={4}>
+          <DetailsPlaceholder>
+            Select a Play list to see details
+          </DetailsPlaceholder>
+        </Grid.Column>
+      </Grid>
+    </Container>
   );
 }
 
