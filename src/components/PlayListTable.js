@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 import Playlist from "./Playlist";
 import PlayListTablePagination from "./PlaylistTablePagination";
+import DetailsPlaceholder from "./DetailsPlaceholder";
 function PlayListTable({
   playlists,
-  tracklistId,
   onPageDirectionClick,
   pages,
   onPlayListClick,
@@ -18,11 +18,7 @@ function PlayListTable({
           <Table.HeaderCell>Track Count</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-      <Playlist
-        playlists={playlists}
-        tracklistId={tracklistId}
-        onPlayListClick={onPlayListClick}
-      />
+      <Playlist playlists={playlists} onPlayListClick={onPlayListClick} />
       <Table.Footer>
         <PlayListTablePagination
           onPageDirectionClick={onPageDirectionClick}

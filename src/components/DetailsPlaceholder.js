@@ -3,7 +3,7 @@ import { Segment, Header, Icon } from "semantic-ui-react";
 
 function DetailsPlaceholder({ children }) {
   return (
-    <Segment placeholder>
+    <Segment placeholder size="large">
       <Header icon>
         <Icon name="pdf file outline" />
         {children}

@@ -9,14 +9,17 @@ import {
   getPlayListDetails,
 } from "../modules/spotifyApi";
 import PlayListTablePagination from "../components/PlaylistTablePagination";
+
+const blankTableData = [];
 function AppLayout() {
   const [query, setQuery] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
+  const [playlists, setPlaylists] = useState();
   const [playlistId, setPlaylistId] = useState(null);
   const [error, setError] = useState(null);
   const [pages, setPages] = useState({});
   const [pageSelection, setPageSelection] = useState();
   const [playlistDetail, setPlayListDetail] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const search = (value) => {
     setQuery(value);
   };
@@ -85,7 +88,11 @@ function AppLayout() {
       <SearchForm query={query} setQuery={setQuery} />
       <Grid>
         <Grid.Column width={12}>
-          {playlists && !error && (
+          {!playlists && !isLoading && (
+            <DetailsPlaceholder>Search for playlists </DetailsPlaceholder>
+          )}
+          {}
+          {playlists && (
             <PlayListTable
               pages={pages}
               playlists={playlists}
