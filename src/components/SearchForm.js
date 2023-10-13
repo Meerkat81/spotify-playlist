@@ -1,20 +1,15 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 
 function SearchForm({ query, setQuery }) {
   return (
-    <Form onSubmit={(event) => setQuery(event.target.term.value)}>
-      <Form.Field>
-        <label>Playlist</label>
-        <input
-          name="term"
-          placeholder="Search Playlists"
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
-        />
-      </Form.Field>
-    </Form>
+    <Input
+      name="term"
+      placeholder="Search Playlists"
+      onChange={(e) => {
+        setQuery(e.target.value);
+      }}
+    />
   );
 }
 
