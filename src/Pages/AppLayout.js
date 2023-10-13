@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Segment, Grid, Container } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
 import DetailsPlaceholder from "../components/DetailsPlaceholder";
@@ -8,9 +8,7 @@ import {
   playListTablePagination,
   getPlayListDetails,
 } from "../modules/spotifyApi";
-import PlayListTablePagination from "../components/PlaylistTablePagination";
 
-const blankTableData = [];
 function AppLayout() {
   const [query, setQuery] = useState(null);
   const [playlists, setPlaylists] = useState();

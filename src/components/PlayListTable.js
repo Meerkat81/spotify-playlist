@@ -2,7 +2,6 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 import Playlist from "./Playlist";
 import PlayListTablePagination from "./PlaylistTablePagination";
-import DetailsPlaceholder from "./DetailsPlaceholder";
 function PlayListTable({
   playlists,
   onPageDirectionClick,
