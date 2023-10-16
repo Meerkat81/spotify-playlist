@@ -9,10 +9,10 @@ function PlayListTable({
   onPlayListClick,
 }) {
   return (
-    <Table celled small>
+    <Table columns={3} celled compact singleLine={false} textAlign="left">
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell></Table.HeaderCell>
+          <Table.HeaderCell width={2}></Table.HeaderCell>
           <Table.HeaderCell>Playlist</Table.HeaderCell>
           <Table.HeaderCell>Track Count</Table.HeaderCell>
         </Table.Row>

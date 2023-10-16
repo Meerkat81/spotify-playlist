@@ -7,7 +7,7 @@ function PlayListTablePagination({ pages, onPageDirectionClick }) {
       <Table.HeaderCell colSpan="3">
         <Pagination
           totalPages={numberOfPages}
-          siblingRange={5}
+          siblingRange={2}
           onPageChange={(e, d) => onPageDirectionClick(d)}
         />
       </Table.HeaderCell>

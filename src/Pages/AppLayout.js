@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container } from "semantic-ui-react";
+import { Grid, Container, Loader } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
 import DetailsPlaceholder from "../components/DetailsPlaceholder";
@@ -82,10 +82,12 @@ function AppLayout() {
   );
 
   return (
-    <Container>
+    <Container
+      style={{ marginTop: "3em", height: "calc(100vh - 7.2rem - 3 * 2.4rem)" }}
+    >
       <SearchForm query={query} setQuery={setQuery} />
       <Grid>
-        <Grid.Column width={12}>
+        <Grid.Column width={10}>
           {!playlists && !isLoading && (
             <DetailsPlaceholder>Search for playlists </DetailsPlaceholder>
           )}
@@ -99,7 +101,7 @@ function AppLayout() {
             />
           )}
         </Grid.Column>
-        <Grid.Column width={4}>
+        <Grid.Column width={6}>
           <DetailsPlaceholder>
             Select a Play list to see details
           </DetailsPlaceholder>
