@@ -10,7 +10,7 @@ import {
 } from "../modules/spotifyApi";
 
 function AppLayout() {
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
   const [playlistId, setPlaylistId] = useState(null);
   const [error, setError] = useState(null);
@@ -45,7 +45,6 @@ function AppLayout() {
         const results = await getPlayListDetails(playlistId);
         setPlayListDetail(results);
         if (results instanceof Error) {
-          console.log("lol", results.message);
           setError(results.message);
         } else {
           // console.log(results);
@@ -59,28 +58,29 @@ function AppLayout() {
   useEffect(
     function () {
       async function callSpotify() {
-        if (query.length < 3) return;
-
+        setIsLoading(true);
+        setError("");
         const results = await playListSearch(query);
-        // const {items: playlist, }
         const { limit, next, offset, previous, total } = results.playlists;
         setPages({ limit, next, offset, previous, total });
         setPlaylists(results.playlists.items);
 
         if (results instanceof Error) {
-          console.log("lol", results.message);
           setError(results.message);
         } else {
-          // console.log(results);
+          setIsLoading(false);
         }
       }
 
-      if (query) callSpotify();
-      return function () {};
+      if (query.length < 3) {
+        setPlaylists("");
+        setError("");
+        return;
+      }
+      callSpotify();
     },
     [query]
   );
-
   return (
     <Container
       style={{ marginTop: "3em", height: "calc(100vh - 7.2rem - 3 * 2.4rem)" }}
@@ -88,10 +88,11 @@ function AppLayout() {
       <SearchForm query={query} setQuery={setQuery} />
       <Grid>
         <Grid.Column width={10}>
-          {!playlists && !isLoading && (
-            <DetailsPlaceholder>Search for playlists </DetailsPlaceholder>
+          {!playlists && (
+            <DetailsPlaceholder isLoading={isLoading} icon="music">
+              Search for playlists{" "}
+            </DetailsPlaceholder>
           )}
-          {}
           {playlists && (
             <PlayListTable
               pages={pages}
@@ -102,9 +103,11 @@ function AppLayout() {
           )}
         </Grid.Column>
         <Grid.Column width={6}>
-          <DetailsPlaceholder>
-            Select a Play list to see details
-          </DetailsPlaceholder>
+          {playlists && (
+            <DetailsPlaceholder icon="info circle">
+              Select a Play list to see details
+            </DetailsPlaceholder>
+          )}
         </Grid.Column>
       </Grid>
     </Container>

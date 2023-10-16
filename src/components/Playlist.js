@@ -3,7 +3,7 @@ import { Table, Image } from "semantic-ui-react";
 function Playlist({ playlists, onPlayListClick }) {
   return (
     <Table.Body>
-      {playlists.map((playlist) => {
+      {playlists?.map((playlist) => {
         let image = playlist.images[0].url;
 
         return (
