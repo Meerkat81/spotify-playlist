@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container, Loader } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 import SearchForm from "../components/SearchForm";
 import PlayListTable from "../components/PlayListTable";
 import DetailsPlaceholder from "../components/DetailsPlaceholder";
@@ -20,9 +20,6 @@ function AppLayout() {
   const [playlistDetail, setPlayListDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
-  const search = (value) => {
-    setQuery(value);
-  };
 
   useEffect(
     function () {
