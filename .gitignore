@@ -26,3 +26,4 @@ yarn-error.log*
 .env
 src/modules/test.js
 src/util/SpotifyAPoldI.js
+src/modules/terminal.js

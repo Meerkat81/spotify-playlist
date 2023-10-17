@@ -8,6 +8,7 @@ import {
   playListTablePagination,
   getPlayListDetails,
 } from "../modules/spotifyApi";
+import Chart from "../components/chart/Chart";
 
 function AppLayout() {
   const [query, setQuery] = useState("");
@@ -18,6 +19,7 @@ function AppLayout() {
   const [pageSelection, setPageSelection] = useState();
   const [playlistDetail, setPlayListDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const search = (value) => {
     setQuery(value);
   };
@@ -42,12 +44,13 @@ function AppLayout() {
   useEffect(
     function () {
       async function CallSpotifyDetails() {
+        setIsLoadingDetails(true);
         const results = await getPlayListDetails(playlistId);
         setPlayListDetail(results);
         if (results instanceof Error) {
           setError(results.message);
         } else {
-          // console.log(results);
+          setIsLoadingDetails(false);
         }
       }
       if (playlistId) CallSpotifyDetails();
@@ -103,11 +106,12 @@ function AppLayout() {
           )}
         </Grid.Column>
         <Grid.Column width={6}>
-          {playlists && (
-            <DetailsPlaceholder icon="info circle">
+          {playlists && !playlistDetail && (
+            <DetailsPlaceholder isLoading={isLoadingDetails} icon="info circle">
               Select a Play list to see details
             </DetailsPlaceholder>
           )}
+          {!playlistDetail && <Chart />}
         </Grid.Column>
       </Grid>
     </Container>
