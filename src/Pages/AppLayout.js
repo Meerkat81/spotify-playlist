@@ -9,7 +9,7 @@ import {
   getPlayListDetails,
 } from "../modules/spotifyApi";
 import Chart from "../components/chart/Chart";
-
+import Header from "../components/header/Header";
 function AppLayout() {
   const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
@@ -82,36 +82,45 @@ function AppLayout() {
     [query]
   );
   return (
-    <Container
-      style={{ marginTop: "3em", height: "calc(100vh - 7.2rem - 3 * 2.4rem)" }}
-    >
-      <SearchForm query={query} setQuery={setQuery} />
-      <Grid>
-        <Grid.Column width={10}>
-          {!playlists && (
-            <DetailsPlaceholder isLoading={isLoading} icon="music">
-              Search for playlists{" "}
-            </DetailsPlaceholder>
-          )}
-          {playlists && (
-            <PlayListTable
-              pages={pages}
-              playlists={playlists}
-              onPageDirectionClick={handlePaginationClick}
-              onPlayListClick={handlePlayListClick}
-            />
-          )}
-        </Grid.Column>
-        <Grid.Column width={6}>
-          {playlists && !playlistDetail && (
-            <DetailsPlaceholder isLoading={isLoadingDetails} icon="info circle">
-              Select a Play list to see details
-            </DetailsPlaceholder>
-          )}
-          {playlistDetail && <Chart playlistDetail={playlistDetail} />}
-        </Grid.Column>
-      </Grid>
-    </Container>
+    <>
+      <Header />
+      <Container
+        style={{
+          marginTop: "3em",
+          height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
+        }}
+      >
+        <SearchForm query={query} setQuery={setQuery} />
+        <Grid>
+          <Grid.Column width={10}>
+            {!playlists && (
+              <DetailsPlaceholder isLoading={isLoading} icon="music">
+                Search for playlists{" "}
+              </DetailsPlaceholder>
+            )}
+            {playlists && (
+              <PlayListTable
+                pages={pages}
+                playlists={playlists}
+                onPageDirectionClick={handlePaginationClick}
+                onPlayListClick={handlePlayListClick}
+              />
+            )}
+          </Grid.Column>
+          <Grid.Column width={6}>
+            {playlists && !playlistDetail && (
+              <DetailsPlaceholder
+                isLoading={isLoadingDetails}
+                icon="info circle"
+              >
+                Select a Play list to see details
+              </DetailsPlaceholder>
+            )}
+            {playlistDetail && <Chart playlistDetail={playlistDetail} />}
+          </Grid.Column>
+        </Grid>
+      </Container>
+    </>
   );
 }
 
