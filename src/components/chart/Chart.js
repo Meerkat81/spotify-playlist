@@ -462,6 +462,9 @@ const scatterOptions = {
     type: "scatter",
     zoomType: "xy",
   },
+  credits: {
+    enabled: false,
+  },
   title: {
     text: "Tracks Popularity and Year",
     align: "center",
