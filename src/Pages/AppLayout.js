@@ -111,7 +111,7 @@ function AppLayout() {
               Select a Play list to see details
             </DetailsPlaceholder>
           )}
-          {!playlistDetail && <Chart />}
+          {playlistDetail && <Chart playlistDetail={playlistDetail} />}
         </Grid.Column>
       </Grid>
     </Container>

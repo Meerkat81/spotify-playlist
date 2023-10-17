@@ -3,19 +3,6 @@ import { Segment } from "semantic-ui-react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-const options = {
-  chart: {
-    type: "spline",
-  },
-  title: {
-    text: "My chart",
-  },
-  series: [
-    {
-      data: [1, 2, 1, 4, 3, 6],
-    },
-  ],
-};
 const series = [
   {
     name: "Year",
@@ -24,7 +11,6 @@ const series = [
     data: [],
   },
 ];
-console.log(series[0].data);
 const playListSongs = {
   items: [
     {
@@ -471,7 +457,6 @@ playListSongs.items.forEach((song) => {
     dateFormat(song.track.album.release_date),
   ]);
 });
-console.log(series);
 const scatterOptions = {
   chart: {
     type: "scatter",
@@ -526,11 +511,15 @@ const scatterOptions = {
   },
   series,
 };
-console.log(scatterOptions);
-function Chart() {
+function Chart({ playlistDetail }) {
+  playlistDetail.items.forEach((song) => {
+    series[0].data.push([
+      song.track.popularity,
+      dateFormat(song.track.album.release_date),
+    ]);
+  });
   return (
     <Segment>
-      <HighchartsReact highcharts={Highcharts} options={options} />
       <HighchartsReact highcharts={Highcharts} options={scatterOptions} />
     </Segment>
   );
