@@ -15,23 +15,13 @@ function AppLayout() {
   const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
   const [playlistId, setPlaylistId] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [pages, setPages] = useState({});
   const [pageSelection, setPageSelection] = useState();
   const [playlistDetail, setPlayListDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
-  useEffect(
-    function () {
-      async function CallSpotify() {
-        const results = await playListTablePagination(pageSelection, query);
-        setPlaylists(results.playlists.items);
-      }
-      if (pageSelection) CallSpotify();
-    },
-    [pageSelection]
-  );
   function handlePaginationClick(direction) {
     setPageSelection(direction.activePage);
   }
@@ -41,7 +31,24 @@ function AppLayout() {
 
   useEffect(
     function () {
+      async function CallSpotify() {
+        setError("");
+        const results = await playListTablePagination(pageSelection, query);
+        if (results instanceof Error) {
+          setError(results.message);
+        } else {
+          setPlaylists(results.playlists.items);
+        }
+      }
+      if (pageSelection) CallSpotify();
+    },
+    [pageSelection]
+  );
+
+  useEffect(
+    function () {
       async function CallSpotifyDetails() {
+        setError("");
         setIsLoadingDetails(true);
         const results = await getPlayListDetails(playlistId);
 
@@ -101,7 +108,7 @@ function AppLayout() {
                 Search for playlists{" "}
               </DetailsPlaceholder>
             )}
-            {playlists && (
+            {playlists && !error && (
               <PlayListTable
                 pages={pages}
                 playlists={playlists}
@@ -119,7 +126,9 @@ function AppLayout() {
                 Select a Play list to see details
               </DetailsPlaceholder>
             )}
-            {playlistDetail && <Chart playlistDetail={playlistDetail} />}
+            {playlistDetail && !error && (
+              <Chart playlistDetail={playlistDetail} />
+            )}
           </Grid.Column>
         </Grid>
         {error && <ErrorMessage />}
