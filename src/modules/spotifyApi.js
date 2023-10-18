@@ -77,7 +77,7 @@ async function getPlayListDetails(id) {
   await getAccessToken();
   const header = "Bearer " + authorization.accessToken;
   let data = await postData(
-    `https://api.spotify.com/v1/playlists/${id}/tracks?limit=100&fields=items(track.popularity,track(album(release_date)))`,
+    `https://api.spotify.com/v1/playlists/${id}/tracks?limit=100&fields=items(track.popularity,track(name,album(release_date, artists)))`,
     { auth: header, method: "GET" }
   );
   if (data.err) return data.err;

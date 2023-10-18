@@ -71,10 +71,14 @@ function Chart({ playlistDetail }) {
         },
       },
     },
+    tooltip: {
+      pointFormat: "Popularity: {point.x} <br/> Year: {point.y}",
+    },
     series,
   };
 
   playlistDetail.items.forEach((song) => {
+    console.log(song);
     series[0].data.push([
       song.track.popularity,
       dateFormat(song.track.album.release_date),
