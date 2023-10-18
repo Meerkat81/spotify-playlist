@@ -1,4 +1,8 @@
-let accessToken = false;
+let authorization = {
+  expiresTime: null,
+  accessToken: null,
+  expired: () => authorization.expiresTime < Date.now(),
+};
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 
@@ -34,18 +38,21 @@ async function postData(url = "", data = {}) {
 }
 
 async function getAccessToken() {
-  if (accessToken) return accessToken;
+  if (!authorization.expired) return authorization.accessToken;
   let res = await postData("https://accounts.spotify.com/api/token", {
     grant_type: "client_credentials",
   });
-  if (res.access_token) accessToken = res.access_token;
+  if (res.access_token) {
+    authorization.accessToken = res.access_token;
+    authorization.expiresTime = Date.now() + 1 * 60 * 60 * 1000;
+  }
   return;
 }
 
 async function playListTablePagination(number, query) {
   const offset = number * 10;
   await getAccessToken();
-  const header = "Bearer " + accessToken;
+  const header = "Bearer " + authorization.accessToken;
   let data = await postData(
     `https://api.spotify.com/v1/search?query=${query}&type=playlist&locale=en-US%2Cen&offset=${offset}&limit=10`,
     { auth: header, method: "GET" }
@@ -56,7 +63,7 @@ async function playListTablePagination(number, query) {
 }
 async function playListSearch(term) {
   await getAccessToken();
-  const header = "Bearer " + accessToken;
+  const header = "Bearer " + authorization.accessToken;
   let data = await postData(
     `https://api.spotify.com/v1/search?q=${term}&type=playlist&offset=10&limit=10`,
     { auth: header, method: "GET" }
@@ -68,7 +75,7 @@ async function playListSearch(term) {
 
 async function getPlayListDetails(id) {
   await getAccessToken();
-  const header = "Bearer " + accessToken;
+  const header = "Bearer " + authorization.accessToken;
   let data = await postData(
     `https://api.spotify.com/v1/playlists/${id}/tracks?limit=100&fields=items(track.popularity,track(album(release_date)))`,
     { auth: header, method: "GET" }
