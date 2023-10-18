@@ -51,7 +51,6 @@ async function playListTablePagination(number, query) {
     { auth: header, method: "GET" }
   );
   if (data.err) return data.err;
-  console.log(data);
 
   return data;
 }
