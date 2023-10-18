@@ -10,6 +10,7 @@ import {
 } from "../modules/spotifyApi";
 import Chart from "../components/chart/Chart";
 import Header from "../components/header/Header";
+import ErrorMessage from "../components/ErrorMessage";
 function AppLayout() {
   const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
@@ -43,10 +44,11 @@ function AppLayout() {
       async function CallSpotifyDetails() {
         setIsLoadingDetails(true);
         const results = await getPlayListDetails(playlistId);
-        setPlayListDetail(results);
+
         if (results instanceof Error) {
           setError(results.message);
         } else {
+          setPlayListDetail(results);
           setIsLoadingDetails(false);
         }
       }
@@ -120,6 +122,7 @@ function AppLayout() {
             {playlistDetail && <Chart playlistDetail={playlistDetail} />}
           </Grid.Column>
         </Grid>
+        {error && <ErrorMessage />}
       </Container>
     </>
   );
