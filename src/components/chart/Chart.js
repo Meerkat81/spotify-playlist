@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment } from "semantic-ui-react";
+import { Segment, Sticky } from "semantic-ui-react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
@@ -81,9 +81,11 @@ function Chart({ playlistDetail }) {
     ]);
   });
   return (
-    <Segment>
-      <HighchartsReact highcharts={Highcharts} options={scatterOptions} />
-    </Segment>
+    <Sticky style={{ marginTop: "6em" }}>
+      <Segment>
+        <HighchartsReact highcharts={Highcharts} options={scatterOptions} />
+      </Segment>
+    </Sticky>
   );
 }
 
