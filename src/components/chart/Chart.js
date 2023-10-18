@@ -72,17 +72,19 @@ function Chart({ playlistDetail }) {
       },
     },
     tooltip: {
-      pointFormat: "Popularity: {point.x} <br/> Year: {point.y}",
+      pointFormat:
+        "Popularity: {point.x} <br/> Year: {point.y} <br/> Track name: {point.custom.trackName} <br/> Album name:  {point.custom.album}",
     },
     series,
   };
 
   playlistDetail.items.forEach((song) => {
     console.log(song);
-    series[0].data.push([
-      song.track.popularity,
-      dateFormat(song.track.album.release_date),
-    ]);
+    series[0].data.push({
+      x: song.track.popularity,
+      y: dateFormat(song.track.album.release_date),
+      custom: { album: song.track.album.name, trackName: song.track.name },
+    });
   });
   return (
     <Sticky style={{ marginTop: "6em" }}>
