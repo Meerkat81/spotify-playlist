@@ -46,7 +46,7 @@ function AppLayout() {
       }
       if (pageSelection) CallSpotify();
     },
-    [pageSelection]
+    [pageSelection, query]
   );
 
   useEffect(

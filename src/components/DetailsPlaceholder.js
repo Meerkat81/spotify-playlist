@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Header, Icon, Dimmer } from "semantic-ui-react";
+import { Segment, Header, Icon } from "semantic-ui-react";
 
 function DetailsPlaceholder({ children, isLoading, icon }) {
   return (
