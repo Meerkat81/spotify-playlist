@@ -92,15 +92,15 @@ function AppLayout() {
   );
   return (
     <>
-      <Header>
-        <SearchForm query={query} setQuery={setQuery} />
-      </Header>
       <Container
         style={{
           marginTop: "6em",
           height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
         }}
       >
+        <Header>
+          <SearchForm query={query} setQuery={setQuery} />
+        </Header>
         <Grid>
           <Grid.Column width={10}>
             {!playlists && (
