@@ -3,6 +3,7 @@ let authorization = {
   accessToken: null,
   expired: () => authorization.expiresTime < Date.now(),
 };
+
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 
@@ -38,7 +39,7 @@ async function postData(url = "", data = {}) {
 }
 
 async function getAccessToken() {
-  if (!authorization.expired) return authorization.accessToken;
+  if (!authorization.expired()) return authorization.accessToken;
   let res = await postData("https://accounts.spotify.com/api/token", {
     grant_type: "client_credentials",
   });

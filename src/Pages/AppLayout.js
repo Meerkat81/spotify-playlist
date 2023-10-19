@@ -32,7 +32,7 @@ function AppLayout() {
     setQuery("");
     setPlaylists();
   }
-
+  //pagination
   useEffect(
     function () {
       async function CallSpotify() {
@@ -48,7 +48,7 @@ function AppLayout() {
     },
     [pageSelection, query]
   );
-
+  //details
   useEffect(
     function () {
       async function CallSpotifyDetails() {
@@ -58,6 +58,7 @@ function AppLayout() {
 
         if (results instanceof Error) {
           setError(results.message);
+          setIsLoadingDetails(false);
         } else {
           setPlayListDetail(results);
           setIsLoadingDetails(false);
@@ -67,20 +68,20 @@ function AppLayout() {
     },
     [playlistId]
   );
-
+  //query
   useEffect(
     function () {
       async function callSpotify() {
         setIsLoading(true);
         setError("");
         const results = await playListSearch(query);
-        const { limit, next, offset, previous, total } = results.playlists;
-        setPages({ limit, next, offset, previous, total });
-        setPlaylists(results.playlists.items);
-
         if (results instanceof Error) {
           setError(results.message);
+          setIsLoading(false);
         } else {
+          const { limit, next, offset, previous, total } = results.playlists;
+          setPages({ limit, next, offset, previous, total });
+          setPlaylists(results.playlists.items);
           setIsLoading(false);
         }
       }
