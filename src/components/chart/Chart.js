@@ -9,8 +9,8 @@ function dateFormat(date) {
 function Chart({ playlistDetail }) {
   const series = [
     {
-      name: "Year",
-      id: "year",
+      name: "Track",
+      id: "track",
       marker: { symbol: "circle" },
       data: [],
     },
@@ -29,6 +29,7 @@ function Chart({ playlistDetail }) {
       align: "center",
     },
     xAxis: {
+      floor: 0,
       title: {
         text: "Popularity",
       },
@@ -40,6 +41,7 @@ function Chart({ playlistDetail }) {
       showLastLabel: true,
     },
     yAxis: {
+      allowDecimals: false,
       title: {
         text: "Year",
       },
@@ -73,13 +75,12 @@ function Chart({ playlistDetail }) {
     },
     tooltip: {
       pointFormat:
-        "Popularity: {point.x} <br/> Year: {point.y} <br/> Track name: {point.custom.trackName} <br/> Album name:  {point.custom.album}",
+        "Spotify Popularity: {point.x} <br/> Year: {point.y} <br/> Track name: {point.custom.trackName} <br/> Album name:  {point.custom.album}",
     },
     series,
   };
 
   playlistDetail.items.forEach((song) => {
-    console.log(song);
     series[0].data.push({
       x: song.track.popularity,
       y: dateFormat(song.track.album.release_date),
