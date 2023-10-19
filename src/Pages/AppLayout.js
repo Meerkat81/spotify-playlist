@@ -109,7 +109,7 @@ function AppLayout() {
           <Grid.Column width={10}>
             {!playlists && (
               <DetailsPlaceholder isLoading={isLoading} icon="music">
-                Search for playlists{" "}
+                Search for playlists
               </DetailsPlaceholder>
             )}
             {playlists && !error && (
@@ -127,7 +127,7 @@ function AppLayout() {
                 isLoading={isLoadingDetails}
                 icon="info circle"
               >
-                Select a Play list to see details
+                Select a playlist to see details
               </DetailsPlaceholder>
             )}
             {playlistDetail && !error && (
