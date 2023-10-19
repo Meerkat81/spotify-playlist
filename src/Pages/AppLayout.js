@@ -28,6 +28,10 @@ function AppLayout() {
   function handlePlayListClick(id) {
     setPlaylistId(id);
   }
+  function handleTitleClick() {
+    setQuery("");
+    setPlaylists();
+  }
 
   useEffect(
     function () {
@@ -98,7 +102,7 @@ function AppLayout() {
           height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
         }}
       >
-        <Header>
+        <Header onTitleClick={handleTitleClick}>
           <SearchForm query={query} setQuery={setQuery} />
         </Header>
         <Grid>
