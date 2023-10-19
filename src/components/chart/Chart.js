@@ -41,6 +41,7 @@ function Chart({ playlistDetail }) {
       showLastLabel: true,
     },
     yAxis: {
+      floor: 1400,
       allowDecimals: false,
       title: {
         text: "Year",
