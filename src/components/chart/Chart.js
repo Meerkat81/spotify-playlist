@@ -80,8 +80,8 @@ function Chart({ playlistDetail }) {
     },
     series,
   };
-
   playlistDetail.items.forEach((song) => {
+    if (!song.track.album.release_date) return;
     series[0].data.push({
       x: song.track.popularity,
       y: dateFormat(song.track.album.release_date),
