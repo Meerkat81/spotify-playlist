@@ -21,8 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-src/modules/terminal.js
+.eslintcache
 .gitignore
-src/util/SpotifyAPoldI.js
-src/modules/test.js
 .env
+src/modules/test.js
+src/util/SpotifyAPoldI.js
+src/modules/terminal.js

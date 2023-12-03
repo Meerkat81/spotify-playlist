@@ -1,5 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -27,7 +34,10 @@
 .App-link {
   color: #61dafb;
 }
-
+.playList-image {
+  height: 180px;
+  width: 180px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
