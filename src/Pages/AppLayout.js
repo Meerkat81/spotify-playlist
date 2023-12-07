@@ -8,7 +8,7 @@ import {
   playListTablePagination,
   getPlayListDetails,
 } from "../modules/spotifyApi";
-import Chart from "../components/chart/Chart";
+import PopularityChart from "../components/chart/PopularityChart";
 import Header from "../components/header/Header";
 import ErrorMessage from "../components/ErrorMessage";
 import ChartSegment from "../components/ChartSegment";
@@ -134,7 +134,7 @@ function AppLayout() {
             )}
             {playlistDetail && !error && (
               <ChartSegment>
-                <Chart playlistDetail={playlistDetail} />
+                <PopularityChart playlistDetail={playlistDetail} />
               </ChartSegment>
             )}
           </Grid.Column>

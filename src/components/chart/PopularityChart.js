@@ -1,12 +1,11 @@
 import React from "react";
-import { Segment, Sticky } from "semantic-ui-react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 function dateFormat(date) {
   return Number(date.substring(0, 4));
 }
-function Chart({ playlistDetail }) {
+function PopularityChart({ playlistDetail }) {
   const series = [
     {
       name: "Track",
@@ -88,13 +87,7 @@ function Chart({ playlistDetail }) {
       custom: { album: song.track.album.name, trackName: song.track.name },
     });
   });
-  return (
-    <Sticky style={{ marginTop: "6em" }}>
-      <Segment>
-        <HighchartsReact highcharts={Highcharts} options={scatterOptions} />
-      </Segment>
-    </Sticky>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={scatterOptions} />;
 }
 
-export default Chart;
+export default PopularityChart;
