@@ -11,6 +11,7 @@ import {
 import Chart from "../components/chart/Chart";
 import Header from "../components/header/Header";
 import ErrorMessage from "../components/ErrorMessage";
+import ChartSegment from "../components/ChartSegment";
 function AppLayout() {
   const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
@@ -132,7 +133,9 @@ function AppLayout() {
               </DetailsPlaceholder>
             )}
             {playlistDetail && !error && (
-              <Chart playlistDetail={playlistDetail} />
+              <ChartSegment>
+                <Chart playlistDetail={playlistDetail} />
+              </ChartSegment>
             )}
           </Grid.Column>
         </Grid>
