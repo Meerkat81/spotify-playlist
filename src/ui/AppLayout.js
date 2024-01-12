@@ -9,8 +9,8 @@ import {
   getPlayListDetails,
 } from "../modules/spotifyApi";
 import Chart from "../components/chart/Chart";
-import Header from "../components/header/Header";
-import ErrorMessage from "../components/ErrorMessage";
+import Header from "./Header";
+import ErrorMessage from "./ErrorMessage";
 function AppLayout() {
   const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
