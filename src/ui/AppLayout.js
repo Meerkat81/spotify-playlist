@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Container } from "semantic-ui-react";
-import SearchForm from "../components/SearchForm";
-import PlayListTable from "../components/PlayListTable";
-import DetailsPlaceholder from "../components/DetailsPlaceholder";
+import SearchForm from "../features/playlist/SearchForm";
+import PlayListTable from "../features/playlist/PlayListTable";
+import DetailsPlaceholder from "../features/playlistDetails/DetailsPlaceholder";
 import {
   playListSearch,
   playListTablePagination,
   getPlayListDetails,
 } from "../modules/spotifyApi";
-import Chart from "../components/chart/Chart";
+import Chart from "../features/chart/Chart";
 import Header from "./Header";
 import ErrorMessage from "./ErrorMessage";
 function AppLayout() {
