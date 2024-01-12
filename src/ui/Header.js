@@ -4,7 +4,7 @@ function Header({ children, onTitleClick }) {
   return (
     <Menu fixed="top" inverted>
       <Menu.Item as="a" header onClick={onTitleClick}>
-        Spotify Playlist Fun
+        Spotify Playlist Data
       </Menu.Item>
       <Menu.Item>{children}</Menu.Item>
     </Menu>
