@@ -7,7 +7,7 @@ import {
   playListSearch,
   playListTablePagination,
   getPlayListDetails,
-} from "../modules/spotifyApi";
+} from "../services/spotifyApi";
 import Chart from "../features/chart/Chart";
 import Header from "./Header";
 import ErrorMessage from "./ErrorMessage";
