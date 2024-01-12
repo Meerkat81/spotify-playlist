@@ -97,17 +97,19 @@ function AppLayout() {
   );
   return (
     <>
+      <Header onTitleClick={handleTitleClick}>
+        <SearchForm query={query} setQuery={setQuery} />
+      </Header>
       <Container
+        fluid={true}
         style={{
           marginTop: "6em",
           height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
+          padding: "5px",
         }}
       >
-        <Header onTitleClick={handleTitleClick}>
-          <SearchForm query={query} setQuery={setQuery} />
-        </Header>
         <Grid>
-          <Grid.Column width={10}>
+          <Grid.Column width={8}>
             {!playlists && (
               <DetailsPlaceholder isLoading={isLoading} icon="music">
                 Search for playlists
@@ -122,7 +124,7 @@ function AppLayout() {
               />
             )}
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={4}>
             {playlists && !playlistDetail && (
               <DetailsPlaceholder
                 isLoading={isLoadingDetails}
@@ -136,8 +138,8 @@ function AppLayout() {
             )}
           </Grid.Column>
         </Grid>
-        {error && <ErrorMessage />}
       </Container>
+      {error && <ErrorMessage />}
     </>
   );
 }
