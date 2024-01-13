@@ -100,49 +100,42 @@ function AppLayout() {
       <Header onTitleClick={handleTitleClick}>
         <SearchForm query={query} setQuery={setQuery} />
       </Header>
-      <Container fluid={true}>
-        <Grid
-          style={{
-            marginTop: "6em",
-            height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
-            padding: "5px",
-          }}
-        >
-          <Grid.Column width={8}>
-            <Container>
-              {!playlists && (
-                <DetailsPlaceholder isLoading={isLoading} icon="music">
-                  Search for playlists
-                </DetailsPlaceholder>
-              )}
-              {playlists && !error && (
-                <PlayListTable
-                  pages={pages}
-                  playlists={playlists}
-                  onPageDirectionClick={handlePaginationClick}
-                  onPlayListClick={handlePlayListClick}
-                />
-              )}
-            </Container>
-          </Grid.Column>
+      <Grid
+        style={{
+          marginTop: "6em",
+          height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
+          padding: "55px",
+        }}
+      >
+        <Grid.Column width={8}>
+          {!playlists && (
+            <DetailsPlaceholder isLoading={isLoading} icon="music">
+              <span style={{ color: "green" }}>Search Artist Up Top</span>
+            </DetailsPlaceholder>
+          )}
+          {playlists && !error && (
+            <PlayListTable
+              pages={pages}
+              playlists={playlists}
+              onPageDirectionClick={handlePaginationClick}
+              onPlayListClick={handlePlayListClick}
+            />
+          )}
+        </Grid.Column>
 
-          <Grid.Column width={4}>
-            <Container>
-              {playlists && !playlistDetail && (
-                <DetailsPlaceholder
-                  isLoading={isLoadingDetails}
-                  icon="info circle"
-                >
-                  Select a playlist to see details
-                </DetailsPlaceholder>
-              )}
-              {playlistDetail && !error && (
-                <Chart playlistDetail={playlistDetail} />
-              )}
-            </Container>
-          </Grid.Column>
-        </Grid>
-      </Container>
+        <Grid.Column width={4} style={{ marginTop: "40px" }}>
+          {playlists && !playlistDetail && (
+            <DetailsPlaceholder isLoading={isLoadingDetails} icon="info circle">
+              <span style={{ color: "green" }}>
+                Select a playlist to the left to see details
+              </span>
+            </DetailsPlaceholder>
+          )}
+          {playlistDetail && !error && (
+            <Chart playlistDetail={playlistDetail} />
+          )}
+        </Grid.Column>
+      </Grid>
       {error && <ErrorMessage />}
     </>
   );
