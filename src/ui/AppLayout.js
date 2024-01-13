@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Container } from "semantic-ui-react";
 import SearchForm from "../features/playlist/SearchForm";
 import PlayListTable from "../features/playlist/PlayListTable";
-import DetailsPlaceholder from "../features/playlistDetails/DetailsPlaceholder";
+import DetailsPlaceholder from "./DetailsPlaceholder";
 import {
   playListSearch,
   playListTablePagination,
@@ -100,42 +100,46 @@ function AppLayout() {
       <Header onTitleClick={handleTitleClick}>
         <SearchForm query={query} setQuery={setQuery} />
       </Header>
-      <Container
-        fluid={true}
-        style={{
-          marginTop: "6em",
-          height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
-          padding: "5px",
-        }}
-      >
-        <Grid>
+      <Container fluid={true}>
+        <Grid
+          style={{
+            marginTop: "6em",
+            height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
+            padding: "5px",
+          }}
+        >
           <Grid.Column width={8}>
-            {!playlists && (
-              <DetailsPlaceholder isLoading={isLoading} icon="music">
-                Search for playlists
-              </DetailsPlaceholder>
-            )}
-            {playlists && !error && (
-              <PlayListTable
-                pages={pages}
-                playlists={playlists}
-                onPageDirectionClick={handlePaginationClick}
-                onPlayListClick={handlePlayListClick}
-              />
-            )}
+            <Container>
+              {!playlists && (
+                <DetailsPlaceholder isLoading={isLoading} icon="music">
+                  Search for playlists
+                </DetailsPlaceholder>
+              )}
+              {playlists && !error && (
+                <PlayListTable
+                  pages={pages}
+                  playlists={playlists}
+                  onPageDirectionClick={handlePaginationClick}
+                  onPlayListClick={handlePlayListClick}
+                />
+              )}
+            </Container>
           </Grid.Column>
+
           <Grid.Column width={4}>
-            {playlists && !playlistDetail && (
-              <DetailsPlaceholder
-                isLoading={isLoadingDetails}
-                icon="info circle"
-              >
-                Select a playlist to see details
-              </DetailsPlaceholder>
-            )}
-            {playlistDetail && !error && (
-              <Chart playlistDetail={playlistDetail} />
-            )}
+            <Container>
+              {playlists && !playlistDetail && (
+                <DetailsPlaceholder
+                  isLoading={isLoadingDetails}
+                  icon="info circle"
+                >
+                  Select a playlist to see details
+                </DetailsPlaceholder>
+              )}
+              {playlistDetail && !error && (
+                <Chart playlistDetail={playlistDetail} />
+              )}
+            </Container>
           </Grid.Column>
         </Grid>
       </Container>
