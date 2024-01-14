@@ -11,6 +11,7 @@ import {
 import Chart from "../features/chart/Chart";
 import Header from "./Header";
 import ErrorMessage from "./ErrorMessage";
+import Footer from "./Footer";
 function AppLayout() {
   const [query, setQuery] = useState("");
   const [playlists, setPlaylists] = useState();
@@ -137,6 +138,7 @@ function AppLayout() {
         </Grid.Column>
       </Grid>
       {error && <ErrorMessage />}
+      <Footer />
     </>
   );
 }
