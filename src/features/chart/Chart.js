@@ -89,11 +89,9 @@ function Chart({ playlistDetail }) {
     });
   });
   return (
-    <Sticky style={{ marginTop: "6em" }}>
-      <Segment>
-        <HighchartsReact highcharts={Highcharts} options={scatterOptions} />
-      </Segment>
-    </Sticky>
+    <Segment>
+      <HighchartsReact highcharts={Highcharts} options={scatterOptions} />
+    </Segment>
   );
 }
 
