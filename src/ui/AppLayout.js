@@ -102,7 +102,7 @@ function AppLayout() {
       </Header>
       <Grid
         style={{
-          marginTop: "6em",
+          marginTop: "2em",
           height: "calc(100vh - 7.2rem - 3 * 2.4rem)",
           padding: "55px",
         }}
