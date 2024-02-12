@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import SearchForm from "../features/playlist/SearchForm";
 import PlayListTable from "../features/playlist/PlayListTable";
 import DetailsPlaceholder from "./DetailsPlaceholder";
@@ -101,7 +101,9 @@ function AppLayout() {
       <Header onTitleClick={handleTitleClick}>
         <SearchForm query={query} setQuery={setQuery} />
       </Header>
+
       <Grid
+        inverted
         style={{
           marginTop: "2em",
           height: "calc(100vh - 7.2rem - 3 * 2.4rem)",

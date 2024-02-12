@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Sticky } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
@@ -28,7 +28,7 @@ function Chart({ playlistDetail }) {
       text: "Tracks Popularity and Year",
       align: "center",
     },
-    xAxis: {
+    yAxis: {
       floor: 0,
       title: {
         text: "Popularity",
@@ -40,7 +40,7 @@ function Chart({ playlistDetail }) {
       endOnTick: true,
       showLastLabel: true,
     },
-    yAxis: {
+    xAxis: {
       floor: 1400,
       allowDecimals: false,
       title: {
@@ -83,8 +83,8 @@ function Chart({ playlistDetail }) {
   playlistDetail.items.forEach((song) => {
     if (!song.track.album.release_date) return;
     series[0].data.push({
-      x: song.track.popularity,
-      y: dateFormat(song.track.album.release_date),
+      y: song.track.popularity,
+      x: dateFormat(song.track.album.release_date),
       custom: { album: song.track.album.name, trackName: song.track.name },
     });
   });
