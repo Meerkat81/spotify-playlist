@@ -3,7 +3,7 @@ import AppLayout from "./ui/AppLayout";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const App = (props) => {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -12,6 +12,6 @@ const App = (props) => {
       </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default App;
