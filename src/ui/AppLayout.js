@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Segment } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import SearchForm from "../features/playlist/SearchForm";
 import PlayListTable from "../features/playlist/PlayListTable";
 import DetailsPlaceholder from "./DetailsPlaceholder";
